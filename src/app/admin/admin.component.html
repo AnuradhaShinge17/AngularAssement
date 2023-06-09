@@ -1,0 +1,75 @@
+<button style="float: right;" type="button" class="btn btn-primary" (click)="openModal()">Add Role
+</button>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 *ngIf="formData.controls.id.value == 0" class="modal-title">Add New Role</h4>
+        <h4 *ngIf="formData.controls.id.value != 0" class="modal-title">Update Role</h4>
+      </div>
+      <form [formGroup]="formData" (ngSubmit)="onSave(formData.value)">
+        <div class="modal-body">
+          <input type="text" placeholder="Name Of The Role" class="form form-control" formControlName="admissionRole">
+          <hr>
+          <!-- <div class="modal-footer d-flex justify-content-between"> -->
+          <button type="button" class="btn btn-danger" (click)="closeModal()">
+            Close
+          </button>
+          <button [disabled]="!formData.valid" type="submit" class="btn btn-primary" style="float: right;">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+
+<!---Table-->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name Of The Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let admissionrole of admissionroles;">
+      <td>
+        {{admissionrole.admissionRole}}
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="editRole(admissionrole.id)">
+          Edit
+        </button>&nbsp;
+        <button (click)="deleteRole(admissionrole.id)" type="submit" class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+    <tr>
+
+    </tr>
+    <!-- <tr *ngFor="let admissionrole1 of admissionroles;">
+      <td>
+        {{admissionrole1.}}
+      </td>
+      <td>
+        <button (click)="updateModal()" type="button" class="btn btn-primary">
+          Edit
+        </button>&nbsp;
+        <button class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr> -->
+
+  </tbody>
+</table>
+
+<ul class="pagination  justify-content-end pagination-lg" style="margin: 20px 0;">
+  <li class="page-item"><a href="#" class="page-link">
+      < </a>
+  </li>
+  <li class="page-item"><a href="#" class="page-link">1</a></li>
+  <li class="page-item"><a href="#" class="page-link" style="color: black;">></a></li>
+</ul>
